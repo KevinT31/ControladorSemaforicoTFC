@@ -135,3 +135,10 @@ integracion-sumo/escenarios/lima-amplio/*.xml
  
 # Excluir cualquier rastro local de herramientas externas
 .claude/
+
+# Local/generated backups
+**/backups/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
