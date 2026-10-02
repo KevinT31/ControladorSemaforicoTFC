@@ -1,104 +1,129 @@
+<div align="center">
+
 # Adaptive Traffic Signal Control System
 
-Modular traffic-control platform that combines computer vision, adaptive control, SUMO simulation, backend services and a web interface for traffic analysis.
+### Computer Vision · Fuzzy Control · SUMO · FastAPI
+
+</div>
+
+---
 
 ## Overview
 
-This project explores adaptive traffic-signal control through an integrated software stack. It combines traffic-video processing, traffic-state estimation, fuzzy/adaptive control logic, SUMO scenarios and a web-based operational interface.
+This repository contains the **implementation-focused version** of an adaptive traffic-signal control project.
 
-The repository is structured so individual components can be tested independently or executed through the main launcher.
+It combines traffic-state processing, fuzzy/adaptive control, SUMO simulation, backend services and a web interface in a modular Python codebase.
+
+For the broader thesis/research workspace, see [ControladorSemaf-rico](https://github.com/KevinT31/ControladorSemaf-rico).
+
+## System Flow
+
+~~~mermaid
+flowchart LR
+    Sources[Video / SUMO] --> State[Traffic-State Processing]
+    State --> Core[Adaptive / Fuzzy Control]
+    Core --> Simulation[SUMO Integration]
+    Core --> API[FastAPI Backend]
+    API --> Web[Web Interface]
+    Simulation --> Metrics[Traffic Metrics / Comparisons]
+~~~
 
 ## Main Capabilities
 
-- Traffic video processing and analysis
-- Computer-vision integration
-- Adaptive and fuzzy control logic
-- Fixed-time vs. adaptive strategy comparison
-- SUMO traffic simulation integration
-- REST backend with FastAPI
-- Web interface for visualization
-- System metrics and component status
-- Configuration export
-- Automated/system testing utilities
-
-## Architecture
-
-```text
-Video / SUMO scenarios
-        ↓
-Computer vision & traffic-state processing
-        ↓
-Adaptive / fuzzy control core
-        ↓
-Backend services
-        ↓
-Web visualization and operational tools
-```
+- traffic-video processing utilities
+- computer-vision integration
+- congestion/state estimation
+- fuzzy/adaptive control logic
+- fixed-time vs adaptive comparison
+- SUMO / TraCI integration
+- multiple Lima simulation scenarios
+- FastAPI backend
+- web visualization
+- configuration/status tooling
+- project launcher for common workflows
 
 ## Repository Structure
 
-```text
+~~~text
 .
-├── ejecutar.py              # Main launcher
-├── nucleo/                  # Control logic, metrics and core models
-├── vision_computadora/      # Video and computer-vision processing
-├── integracion-sumo/        # SUMO connectors and scenarios
-├── simulador_trafico/       # Traffic simulation utilities
-├── servidor-backend/        # FastAPI backend
-├── interfaz-web/            # Web interface
-├── datos/                   # Project data
-├── scripts/                 # Utility scripts
-└── requirements.txt         # Python dependencies
-```
+├── ejecutar.py              main launcher
+├── nucleo/                  control logic and congestion models
+├── vision_computadora/      video/computer-vision processing
+├── integracion-sumo/        SUMO connector and scenarios
+├── simulador_trafico/       simulation utilities
+├── servidor-backend/        FastAPI backend
+├── interfaz-web/            web interface
+├── datos/                   project data/results placeholders
+├── scripts/                 utilities
+└── requirements.txt
+~~~
 
-## Getting Started
+## Control Logic
+
+The repository includes dedicated fuzzy-control modules under **nucleo/**, including the thesis-oriented controller implementation.
+
+The objective is to adjust signal behavior using estimated traffic conditions instead of relying only on a fixed timer.
+
+## SUMO Integration
+
+**integracion-sumo/** contains:
+
+- TraCI/SUMO connector code
+- controller integration
+- scenario tooling
+- Lima-oriented scenario data
+- scripts to generate and inspect traffic scenarios
+
+## Run Locally
 
 ### Requirements
 
 - Python 3.9+
-- SUMO / TraCI for traffic simulation
-- `sumo-gui` available in `PATH` for GUI scenarios
+- SUMO / TraCI
+- sumo-gui available in PATH for GUI execution
 
-### Installation
+### Install
 
-```powershell
+~~~powershell
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-```
+~~~
 
-### Run
+### Main launcher
 
-Main menu:
-
-```powershell
+~~~powershell
 python ejecutar.py
-```
+~~~
 
-Backend:
+### Backend
 
-```powershell
+~~~powershell
 python servidor-backend/main.py
-```
+~~~
 
-## Main Menu
+## Launcher Workflows
 
-The launcher exposes workflows for:
+The main launcher exposes flows for:
 
-1. Dashboard startup
-2. Video processing
+1. dashboard startup
+2. video processing
 3. SUMO scenario execution
-4. Adaptive vs. fixed-time comparison
-5. System tests
-6. Component status
-7. Documentation access
-8. Configuration export
+4. adaptive vs fixed-time comparison
+5. system checks
+6. component status
+7. documentation
+8. configuration export
 
-## Notes
+## Scope & Limitations
 
-- Large model files such as `*.pt` are not expected to be versioned directly.
-- SUMO must be installed separately.
-- Generated results, temporary files and heavy artifacts should remain outside normal Git history.
+- validation is simulation/software-oriented, not field deployment
+- SUMO must be installed separately
+- large model files are intentionally not versioned
+- generated simulation/video artifacts should remain outside normal Git history
+- the broader research workspace contains additional experimental/security material not duplicated here
 
-## Portfolio Notes
+---
 
-This repository demonstrates software engineering applied to intelligent transportation systems, combining simulation, computer vision, backend development and adaptive control in a single modular project.
+### What this project demonstrates
+
+**Intelligent transportation · fuzzy control · simulation · computer vision integration · Python architecture · FastAPI**
